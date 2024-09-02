@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+   
+function populateDiv(){
+    const a = document.getElementById('num1').value;
+    const b = document.getElementById('num2').value;
+     const element = document.getElementById("finalSum");
+    
+    fetch("http://localhost:5500/sum?a=" + a  + "&b=" + b)
+    .then(function(response){
+     response.text()
+     .then(function(ans){
+     document.getElementById("finalSum").innerHTML = ans;
+     })
+     })
+     }
+  </script>
+  <body>
+    <input
+      id="num1" type="text" placeholder="enter your number"
+    /><br /><br />
+    <input id="num2" type="text" placeholder="enter your second number"
+    /><br /><br />
+    <button onclick="populateDiv()">calculate sum</button>
+    <div id="finalSum"></div>
+  </body>
+</html>
