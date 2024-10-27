@@ -25,3 +25,5 @@ async function InsertIntoTable(
 }
 
 InsertIntoTable('user5@example.com',"rishbah","123edf").catch(console.error);
+
+//completed
