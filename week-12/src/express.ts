@@ -6,7 +6,7 @@ app.use(express.json()); //Middleware to parse json bodies
 
 // Define the schmea the profiles
 const profileUpdate = z.object({
-  name: z.string().min(1, { message: "name cannot be empty" }),
+  name: z.string().min(1, { message: "name Cannot be empty" }),
   email: z.string().email({ message: "Invalid email " }),
   age: z.number().min(19, { message: "ages should be atleast 19 " }).optional(),
 });
@@ -21,6 +21,7 @@ app.put("/user", (req, res) => {
 
   // Types of updatedBody is inferred
   const updatedBody = result.data;
+  // const updateBody = result.data'
 
   // update database here
   res.json({
