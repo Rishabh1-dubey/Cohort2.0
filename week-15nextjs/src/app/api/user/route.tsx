@@ -1,27 +1,44 @@
-import next from "next";
-import { NextRequestHint } from "next/dist/server/web/adapter";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export function GET(req: NextRequest) {
+const client = new PrismaClient();
+
+export async function GET(req: NextRequest) {
+
+  const user = await client.user.findFirst();
   return NextResponse.json({
-    email: "email@rishabh.com",
-    name: "rishabh",
+    email:user?.email,
+    name:"rishabh"
   });
 }
 
+export async function POST(req: NextRequest) {
+  //body
+  const body = await req.json();
 
-export async function POST(req:NextRequest) {
-    //body
+ try {
+ await client.user.create({
+    data: {
+      email: body.email,
+      password: body.password,
+    },
+  });
 
-    const body = await req.json()
+  // header
+  console.log(req.headers.get("authorization"));
 
-    // header
-    console.log(req.headers.get("authorization"));
+  //serachparams
+  console.log(req.nextUrl.searchParams.get("name"));
 
-    //serachparams
-    console.log(req.nextUrl.searchParams.get("name"))
-
-    return NextResponse.json({
-        messge:"You are signe up"
-    })
+  //postgres      postgresql://neondb_owner:rjO34MdPlAFi@ep-bold-paper-a51gcq0g.us-east-2.aws.neon.tech/neondb?sslmode=require
+   NextResponse.json({
+    body
+  })
+ } catch (error) {
+  NextResponse.json({
+    messge: "Error while Signup",
+  },{
+    status:411
+  });
+ }
 }
