@@ -11,6 +11,8 @@ export async function GET(req: NextRequest) {
     name:"rishabh"
   });
 }
+console.log("here is the output for the code and also code review")
+
 
 export async function POST(req: NextRequest) {
   //body
