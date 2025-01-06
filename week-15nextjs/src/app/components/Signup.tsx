@@ -51,7 +51,7 @@ export function Signup() {
                     onClick={() => {  
                      axios.post("http://localhost:3000/api/user"),
                         {
-                          email,
+                          email,      
                           password
                         }
                         console.log(email, password)
