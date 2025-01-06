@@ -1,13 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+
+const PrismaClientSingleton =()=>{
+  return new PrismaClient()
+}
+
+
 const client = new PrismaClient();
 
 export async function GET(req: NextRequest) {
 
-  const user = await client.user.findFirst();
   return NextResponse.json({
-    email:user?.email,
+    email:"rishabh@gmail.com",
     name:"rishabh"
   });
 }
@@ -17,6 +22,7 @@ console.log("here is the output for the code and also code review")
 export async function POST(req: NextRequest) {
   //body
   const body = await req.json();
+  console.log(body)
 
  try {
  await client.user.create({
@@ -33,11 +39,12 @@ export async function POST(req: NextRequest) {
   console.log(req.nextUrl.searchParams.get("name"));
 
   //postgres      postgresql://neondb_owner:rjO34MdPlAFi@ep-bold-paper-a51gcq0g.us-east-2.aws.neon.tech/neondb?sslmode=require
-   NextResponse.json({
+  return  NextResponse.json({
     body
   })
  } catch (error) {
-  NextResponse.json({
+  console.log(error)
+ return NextResponse.json({
     messge: "Error while Signup",
   },{
     status:411
