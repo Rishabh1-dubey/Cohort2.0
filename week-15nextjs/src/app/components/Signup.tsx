@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useState } from "react";
 
 export function Signup() {
-  const [email, setemail] = useState(" ");
-  const [password, setPassword] = useState(" ");
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
 
@@ -48,16 +48,19 @@ export function Signup() {
 
                 <div className="w-full p-3 text-center rounded-xl bg-blue-400 hover:bg-blue-600 cursor-pointer">
                   <button
-                    onClick={async() => {  
-                     await axios.post("http://localhost:3000/api/user"),
+                    onClick={() => {  
+                     axios.post("http://localhost:3000/api/user"),
                         {
                           email,
                           password
                         }
+                        console.log(email, password)
                     }}
+                    
                   >
                     Signup
                   </button>
+                    
                 </div>
               </form>
             </div>

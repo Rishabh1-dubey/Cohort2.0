@@ -3,16 +3,28 @@ const app = express();
 
 const PORT = 7777;
 
-app.get("/user",(req, res,next) => {
-  console.log("request 2!");
-//   res.send("hello broo i am response 2");
-  next()
-});
-app.get("/user", (req, res, next) => {
-  console.log("hello there i am middle ware");
-//   next();
-});
+const{adminAuth , userAuth} = require("../MIDDLEware/middlewares/auth")
 
-app.listen(PORT, () => {
-  console.log(`server on running on ${PORT}`);
-});
+//middleware
+
+app.use("/admin",adminAuth);
+app.use("/user", userAuth);
+
+
+app.get("/user/login",(req,res)=>{
+  res.send("no need to use middleware")
+})
+
+app.get("/admin/admindetails",adminAuth,(req,res)=>{
+  res.send("adming chalu ho gya bhai balle balle !");
+  console.log("server is running bro ")
+})
+
+app.get("/user/userdetails",userAuth,(req,res)=>{
+  res.send("user bhi chalu ho gya bhai");
+  console.log("server is running broooooo")
+})
+
+app.listen(PORT,()=>{
+  console.log(`server is running on port no ${PORT}`)
+})

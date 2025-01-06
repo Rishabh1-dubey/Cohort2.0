@@ -35,7 +35,6 @@ import { useEffect, useState } from "react";
 async function fetchData() {
     
     const response = await axios.get("http://localhost:3000/api/user")
-
     console.log(response.data)
     return(response.data)
 }
