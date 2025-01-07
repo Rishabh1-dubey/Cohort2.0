@@ -20,3 +20,6 @@ async function createUsersTable() {
 }
 
 createUsersTable();
+
+
+console.log("rishabh")
