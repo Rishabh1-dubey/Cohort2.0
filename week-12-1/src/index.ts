@@ -24,6 +24,9 @@ async function InsertIntoTable(
   }
 }
 
+
+//just check nothing more
+
 InsertIntoTable('user5@example.com',"rishbah","123edf").catch(console.error);
 
 //completed
